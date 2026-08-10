@@ -1,0 +1,10 @@
+import { runTests, TestCase } from '../test-runner';
+import { maxAreaOfIsland } from './solution';
+
+const testCases: TestCase[] = [
+    { input: [[[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]], expected: 6 },
+    { input: [[[0,0,0,0,0,0,0,0]]], expected: 0 },
+    { input: [[[1]]], expected: 1 },
+];
+
+runTests('Task2: MaxAreaOfIsland', maxAreaOfIsland, testCases);

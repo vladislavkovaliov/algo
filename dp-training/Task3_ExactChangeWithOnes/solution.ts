@@ -1,0 +1,29 @@
+/**
+ * Task 3: ExactChangeWithOnes
+ *
+ * Description:
+ * У тебя есть бесконечный запас монет номиналом строго 1 рубль.
+ * Какое минимальное количество монет нужно использовать, чтобы собрать точную сумму amount?
+ *
+ * Signature:
+ * export function exactChangeWithOnes(amount: number): number;
+ *
+ * Test Cases:
+ * [
+ *   {"input": [0], "expected": 0},
+ *   {"input": [1], "expected": 1},
+ *   {"input": [5], "expected": 5},
+ *   {"input": [12], "expected": 12},
+ *   {"input": [25], "expected": 25},
+ *   {"input": [43], "expected": 43},
+ *   {"input": [68], "expected": 68},
+ *   {"input": [71], "expected": 71},
+ *   {"input": [89], "expected": 89},
+ *   {"input": [100], "expected": 100}
+ * ]
+ */
+
+export function exactChangeWithOnes(amount: number): number {
+    // TODO: Implement your solution here
+    return amount;
+}
