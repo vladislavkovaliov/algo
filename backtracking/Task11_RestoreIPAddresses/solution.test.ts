@@ -1,0 +1,10 @@
+import { runTests, TestCase } from '../test-runner';
+import { restoreIpAddresses } from './solution';
+
+const testCases: TestCase[] = [
+    { input: ['25525511135'], expected: ['255.255.11.135', '255.255.111.35'] },
+    { input: ['0000'], expected: ['0.0.0.0'] },
+    { input: ['101023'], expected: ['1.0.10.23', '1.0.102.3', '10.1.0.23', '10.10.2.3', '101.0.2.3'] },
+];
+
+runTests('Task11: RestoreIPAddresses', restoreIpAddresses, testCases);

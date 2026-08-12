@@ -18,5 +18,5 @@
  */
 
 export function shortestPathInGrid(grid: number[][], start: number[], end: number[]): number {
-    return 0;
+    return -1;
 }

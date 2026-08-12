@@ -1,0 +1,10 @@
+import { runTests, TestCase } from '../test-runner';
+import { permute } from './solution';
+
+const testCases: TestCase[] = [
+    { input: [[1, 2, 3]], expected: [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]] },
+    { input: [[1]], expected: [[1]] },
+    { input: [[0, 1]], expected: [[0, 1], [1, 0]] },
+];
+
+runTests('Task2: Permutations', permute, testCases);

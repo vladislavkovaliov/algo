@@ -24,27 +24,5 @@
 
 export function canConstruct(ransomNote: string, magazine: string): boolean {
     // TODO: Implement your solution here
-    const magMap = new Map<string, number>();
-
-    for (const ch of magazine) {
-        if (magMap.has(ch)) {
-            const currCount = magMap.get(ch) || 0;
-
-            magMap.set(ch, currCount + 1);
-        } else {
-            magMap.set(ch, 1);
-        }
-    }
-
-    for (const ch of ransomNote) {
-        const value = magMap.get(ch);
-
-        if (value === undefined || value === 0) {
-            return false;
-        }
-
-        magMap.set(ch, value - 1);
-    }
-
     return true;
 }

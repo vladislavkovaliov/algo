@@ -23,21 +23,5 @@
 
 export function containsDuplicate(nums: number[]): boolean {
     // TODO: Implement your solution here
-    const map = new Map();
-
-    for (let i = 0; i < nums.length; i++) {
-        if (map.has(nums[i])) {
-            const count = map.get(nums[i]);
-
-            if (count + 1 >= 2) {
-                return true
-            }
-
-            map.set(nums[i], count + 1);
-        } else {
-            map.set(nums[i], 1);
-        }
-    }
-
     return false;
 }

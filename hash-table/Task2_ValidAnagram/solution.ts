@@ -24,34 +24,5 @@
 export function isAnagram(s: string, t: string): boolean {
     // TODO: Implement your solution here
 
-    if (s.length !== t.length) {
-        return false;
-    }
-
-    const map = new Map<string, number>();
-
-    for (let i = 0; i < s.length; i++) {
-        const char = s[i];
-
-        if (map.has(char)) {
-            const currCount = map.get(char) || 0;
-
-            map.set(char, currCount + 1)
-        } else {
-            map.set(char, 1);
-        }
-    }
-
-
-    for (const ch of t) {
-        const value = map.get(ch);
-
-        if (value === undefined || value === 0) {
-            return false;
-        }
-
-        map.set(ch, value - 1);
-    }
-
     return true;
 }

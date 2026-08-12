@@ -18,5 +18,28 @@
  */
 
 export function allPathsSourceTarget(graph: number[][]): number[][] {
+    const len = graph.length;
+    const target = graph.length - 1;
+    const result = [];
+    const stack = [[0]];
+    
+    while (stack.length) {
+        const path = stack.pop();
+
+        const node = path[path.length - 1];
+
+        if (node === target) {
+            result.push(path);
+            continue;
+        }
+
+        for (const n of graph[node]) {
+            stack.push([...path, n]);
+        }
+
+        console.log({stack, result})
+    }
+        
+    console.log(1, {result})
     return [];
 }
