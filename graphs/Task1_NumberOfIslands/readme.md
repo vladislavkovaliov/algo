@@ -48,7 +48,43 @@ export function numIslands(grid: string[][]): number {
 }
 ```
 
+## Решение через очередь (BFS)
+
+```typescript
+export function numIslands(grid: string[][]): number {
+    const m = grid.length;
+    const n = grid[0].length;
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    let count = 0;
+
+    for (let r = 0; r < m; r++) {
+        for (let c = 0; c < n; c++) {
+            if (grid[r][c] !== '1') continue;
+
+            count++;
+            const queue: number[][] = [[r, c]];
+            grid[r][c] = '0';
+
+            while (queue.length > 0) {
+                const [cr, cc] = queue.shift()!;
+                for (const [dr, dc] of dirs) {
+                    const nr = cr + dr;
+                    const nc = cc + dc;
+                    if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;
+                    if (grid[nr][nc] !== '1') continue;
+                    grid[nr][nc] = '0';
+                    queue.push([nr, nc]);
+                }
+            }
+        }
+    }
+
+    return count;
+}
+```
+
 ## Разбор
 
 **Идея:** Стандартная задача на обход компонент связности. Вместо visited используем мутацию grid (замена '1' на '0').
-**Сложность:** O(m·n) по времени, O(m·n) в худшем случае для стека рекурсии.
+**Сложность BFS:** O(m·n) по времени, O(m·n) в худшем случае для очереди.
+**Почему очередь, а не рекурсия?** BFS не создаёт рекурсивный стек вызовов — при больших островах (спиральная форма, >10⁴ клеток) рекурсия падает с Stack Overflow, а очередь работает стабильно.

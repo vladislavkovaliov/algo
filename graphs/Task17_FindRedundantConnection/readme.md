@@ -52,7 +52,45 @@ export function findRedundantConnection(edges: number[][]): number[] {
 }
 ```
 
+## Решение без рекурсии (итеративный find)
+
+Вместо рекурсивного `find` с сжатием пути (`parent[x] = find(parent[x])`) — цикл `while` без рекурсии.
+
+```typescript
+export function findRedundantConnection(edges: number[][]): number[] {
+    const parent: number[] = [];
+    for (let i = 0; i <= edges.length; i++) {
+        parent[i] = i;
+    }
+
+    function find(x: number): number {
+        while (parent[x] !== x) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
+
+    function union(x: number, y: number): boolean {
+        const px = find(x);
+        const py = find(y);
+        if (px === py) return false;
+        parent[px] = py;
+        return true;
+    }
+
+    for (const [u, v] of edges) {
+        if (!union(u, v)) {
+            return [u, v];
+        }
+    }
+
+    return [];
+}
+```
+
 ## Разбор
 
 **Идея:** Union-Find (DSU) для обнаружения цикла в неориентированном графе.
 **Сложность:** O(n · α(n)) по времени, O(n) по памяти.
+**Почему без рекурсии?** Итеративный `find` с трамплинным сжатием (parent[x] = parent[parent[x]]) даёт ту же почти-константную сложность α(n), но не может переполнить стек даже на длинной цепочке рёбер.

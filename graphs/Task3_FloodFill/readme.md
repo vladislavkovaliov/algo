@@ -42,7 +42,39 @@ export function floodFill(image: number[][], sr: number, sc: number, color: numb
 }
 ```
 
+## Решение через очередь (BFS)
+
+```typescript
+export function floodFill(image: number[][], sr: number, sc: number, color: number): number[][] {
+    const m = image.length;
+    const n = image[0].length;
+    const original = image[sr][sc];
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+
+    if (original === color) return image;
+
+    const queue: number[][] = [[sr, sc]];
+    image[sr][sc] = color;
+
+    while (queue.length > 0) {
+        const [cr, cc] = queue.shift()!;
+
+        for (const [dr, dc] of dirs) {
+            const nr = cr + dr;
+            const nc = cc + dc;
+            if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;
+            if (image[nr][nc] !== original) continue;
+            image[nr][nc] = color;
+            queue.push([nr, nc]);
+        }
+    }
+
+    return image;
+}
+```
+
 ## Разбор
 
 **Идея:** DFS от стартовой точки, меняем цвет только у клеток с исходным цветом.
-**Сложность:** O(m·n) по времени, O(m·n) по памяти для стека.
+**Сложность BFS:** O(m·n) по времени, O(m·n) по памяти для очереди.
+**Почему очередь, а не рекурсия?** BFS «заливает» область по кругу-волной из стартового пикселя, не создавая рекурсивный стек — надёжно для огромных областей, где рекурсия упёрлась бы в лимит вызовов.

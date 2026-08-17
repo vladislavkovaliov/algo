@@ -18,5 +18,5 @@
  */
 
 export function maxAreaOfIsland(grid: number[][]): number {
-    return 0;
+   return -1;
 }

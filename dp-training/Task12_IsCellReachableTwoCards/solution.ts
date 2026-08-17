@@ -36,5 +36,5 @@
 
 export function isCellReachableTwoCards(target: number, a: number, b: number): boolean {
     // TODO: Implement your solution here
-    return false;
+    return false;   
 }

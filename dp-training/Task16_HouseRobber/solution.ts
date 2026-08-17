@@ -28,29 +28,6 @@
 
 export function houseRobber(nums: number[]): number {
     // TODO: Implement your solution here
-
-    if (nums.length === 1) {
-        return nums[0];
-    }
-
-    if (nums.length === 2) {
-        return Math.max(nums[0], nums[1]);
-    }
-
-    const len = nums.length;
-    const dp = new Array(len).fill(0);
-
-    dp[0] = nums[0];
-    dp[1] = Math.max(nums[0], nums[1]);
-
-    let max = 0;
-
-    for (let i = 2; i < len; i++) {
-        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
-        max = Math.max(dp[i], max);
-    }
-
-    // console.log(dp);
     
-    return max;
+    return -1;    
 }

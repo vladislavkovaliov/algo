@@ -31,5 +31,5 @@
 
 export function grasshopperTwoOptions(n: number): number {
     // TODO: Implement your solution here
-    return 0;
+    return -1;
 }

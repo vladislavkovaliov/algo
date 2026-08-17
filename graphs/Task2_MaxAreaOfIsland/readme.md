@@ -43,7 +43,47 @@ export function maxAreaOfIsland(grid: number[][]): number {
 }
 ```
 
+## Решение через очередь (BFS)
+
+```typescript
+export function maxAreaOfIsland(grid: number[][]): number {
+    const m = grid.length;
+    const n = grid[0].length;
+    const dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    let max = 0;
+
+    for (let r = 0; r < m; r++) {
+        for (let c = 0; c < n; c++) {
+            if (grid[r][c] !== 1) continue;
+
+            let area = 0;
+            const queue: number[][] = [[r, c]];
+            grid[r][c] = 0;
+
+            while (queue.length > 0) {
+                const [cr, cc] = queue.shift()!;
+                area++;
+
+                for (const [dr, dc] of dirs) {
+                    const nr = cr + dr;
+                    const nc = cc + dc;
+                    if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;
+                    if (grid[nr][nc] !== 1) continue;
+                    grid[nr][nc] = 0;
+                    queue.push([nr, nc]);
+                }
+            }
+
+            max = Math.max(max, area);
+        }
+    }
+
+    return max;
+}
+```
+
 ## Разбор
 
-**Идея:** Почти как NumberOfIslands, но DFS возвращает размер компоненты.
-**Сложность:** O(m·n) по времени, O(m·n) в худшем случае для рекурсии.
+**Идея:** Почти как NumberOfIslands, но DFS возвращает размер компоненты. Площадь = количество клеток, обработанных BFS-волной.
+**Сложность:** O(m·n) по времени, O(m·n) по памяти для очереди.
+**Почему очередь, а не рекурсия?** Та же логика, что в Task1: без рекурсивных вызовов (защита от переполнения стека на больших островах), обход занимает память только под границу волны.

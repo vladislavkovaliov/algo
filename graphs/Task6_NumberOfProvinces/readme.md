@@ -46,7 +46,38 @@ export function numberOfProvinces(isConnected: number[][]): number {
 }
 ```
 
+## Решение через очередь (BFS)
+
+```typescript
+export function numberOfProvinces(isConnected: number[][]): number {
+    const n = isConnected.length;
+    const visited = new Array(n).fill(false);
+    let count = 0;
+
+    for (let city = 0; city < n; city++) {
+        if (visited[city]) continue;
+
+        count++;
+        visited[city] = true;
+        const queue = [city];
+
+        while (queue.length > 0) {
+            const cur = queue.shift()!;
+            for (let neighbor = 0; neighbor < n; neighbor++) {
+                if (isConnected[cur][neighbor] === 1 && !visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+
+    return count;
+}
+```
+
 ## Разбор
 
 **Идея:** классический подсчёт компонент связности через DFS по матрице смежности.
-**Сложность:** O(n²) по времени (проходим всю матрицу), O(n) по памяти (visited).
+**Сложность:** O(n²) по времени (проходим всю матрицу), O(n) по памяти (visited + очередь).
+**Почему очередь, а не рекурсия?** BFS не строит рекурсивный стек; в «глубокой» провинции из тысяч городов рекурсия дала бы глубокую цепочку вызовов (вплоть до Stack Overflow), очередь этого избегает.

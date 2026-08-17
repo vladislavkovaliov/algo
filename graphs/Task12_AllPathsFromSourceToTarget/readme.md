@@ -46,7 +46,38 @@ export function allPathsSourceTarget(graph: number[][]): number[][] {
 }
 ```
 
+## Решение через очередь (BFS)
+
+Вместо рекурсии храним в очереди незавершённые пути. Берём путь, смотрим его последний узел: если это цель — сохраняем; иначе пушим в конец все расширения пути.
+
+```typescript
+export function allPathsSourceTarget(graph: number[][]): number[][] {
+    const n = graph.length;
+    const target = n - 1;
+    const result: number[][] = [];
+
+    const queue: number[][] = [[0]];
+
+    while (queue.length > 0) {
+        const path = queue.shift()!;
+        const node = path[path.length - 1];
+
+        if (node === target) {
+            result.push(path);
+            continue;
+        }
+
+        for (const neighbor of graph[node]) {
+            queue.push([...path, neighbor]);
+        }
+    }
+
+    return result;
+}
+```
+
 ## Разбор
 
 **Идея:** DFS от 0 до n-1, собираем пути через backtracking.
-**Сложность:** O(2^n · n) в худшем случае, O(n) для стека рекурсии.
+**Сложность:** O(2^n · n) в худшем случае, O(2^n · n) по памяти для очереди (храним все незавершённые пути).
+**Почему очередь, а не рекурсия?** В DAG количество путей экспоненциально, и рекурсивный стек «в глубину» здесь легко выходит за лимит. Очередь работает итеративно, а разница в поведении только в порядке перечисления путей (BFS — по длине).

@@ -51,7 +51,42 @@ export function validTree(n: number, edges: number[][]): boolean {
 }
 ```
 
+## Решение без рекурсии (итеративный find)
+
+Тот же DSU, но `find` написан циклом вместо рекурсии.
+
+```typescript
+export function validTree(n: number, edges: number[][]): boolean {
+    if (edges.length !== n - 1) return false;
+
+    const parent: number[] = Array.from({ length: n }, (_, i) => i);
+
+    function find(x: number): number {
+        while (parent[x] !== x) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
+    }
+
+    function union(x: number, y: number): boolean {
+        const px = find(x);
+        const py = find(y);
+        if (px === py) return false;
+        parent[px] = py;
+        return true;
+    }
+
+    for (const [u, v] of edges) {
+        if (!union(u, v)) return false;
+    }
+
+    return true;
+}
+```
+
 ## Разбор
 
 **Идея:** Дерево = n-1 ребро + связность + без циклов. Union-Find проверяет всё за один проход.
 **Сложность:** O(n · α(n)) по времени, O(n) по памяти.
+**Почему без рекурсии?** Итеративный `find` с трамплинным сжатием пути не строит рекурсивный стек: длинная цепочка узлов (например 10⁵) обрабатывается одним циклом без риска переполнения стека.

@@ -37,22 +37,5 @@
 export function exactChangeTwoCoins(amount: number): number {
     // TODO: Implement your solution here
 
-    if (amount === 0) return 0;
-    if (amount === 1) return -1;
-   
-    const dp = new Array(amount + 1).fill(Infinity);
-
-    dp[0] = 0;
-
-    const coins: number[] = [2, 5];
-
-    for (let i = 1; i <= amount; i++) {
-        for (let coin of coins) {
-            if (i - coin >= 0) {
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-            }
-        }
-    }
-
-    return dp[amount];
+    return -1;   
 }
