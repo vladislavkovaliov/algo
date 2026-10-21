@@ -25,5 +25,5 @@
 
 export function sortArrayByParity(nums: number[]): number[] {
     // TODO: Implement your solution here
-    return [];
+    return []
 }

@@ -1,3 +1,6 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+
 export function deepEqual(a: unknown, b: unknown): boolean {
     if (a === b) return true;
     if (a === null || b === null) return false;
@@ -30,40 +33,12 @@ export interface TestCase {
 }
 
 export function runTests(testName: string, fn: (...args: unknown[]) => unknown, testCases: TestCase[]): void {
-    let passed = 0;
-    let failed = 0;
-
-    console.log(`\n${'='.repeat(60)}`);
-    console.log(`Testing: ${testName}`);
-    console.log('='.repeat(60));
-
-    for (let i = 0; i < testCases.length; i++) {
-        const tc = testCases[i];
-        try {
-            const result = fn(...tc.input);
-            const isPass = deepEqual(result, tc.expected);
-
-            if (isPass) {
-                passed++;
-                console.log(`  [PASS] Case #${i + 1}: ${JSON.stringify(tc.input)} => ${JSON.stringify(result)}`);
-            } else {
-                failed++;
-                console.log(`  [FAIL] Case #${i + 1}: ${JSON.stringify(tc.input)}`);
-                console.log(`         Expected: ${JSON.stringify(tc.expected)}`);
-                console.log(`         Got:      ${JSON.stringify(result)}`);
-            }
-        } catch (e) {
-            failed++;
-            console.log(`  [ERROR] Case #${i + 1}: ${JSON.stringify(tc.input)}`);
-            console.log(`          ${e instanceof Error ? e.message : String(e)}`);
+    test(testName, async (t) => {
+        for (let i = 0; i < testCases.length; i++) {
+            const tc = testCases[i];
+            await t.test(`Case #${i + 1}: ${JSON.stringify(tc.input)}`, () => {
+                assert.deepStrictEqual(fn(...tc.input), tc.expected);
+            });
         }
-    }
-
-    console.log('-'.repeat(60));
-    console.log(`Results: ${passed} passed, ${failed} failed, ${testCases.length} total`);
-    console.log('='.repeat(60));
-
-    if (failed > 0) {
-        process.exit(1);
-    }
+    });
 }

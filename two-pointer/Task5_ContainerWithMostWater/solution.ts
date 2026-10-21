@@ -25,5 +25,5 @@
 
 export function containerWithMostWater(height: number[]): number {
     // TODO: Implement your solution here
-    return 0;
+    return max;
 }

@@ -24,5 +24,5 @@
 
 export function minimumKBitFlips(nums: number[], k: number): number {
     // TODO: Implement your solution here
-    return -1;
+    return -1
 }

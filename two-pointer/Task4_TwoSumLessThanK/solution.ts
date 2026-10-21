@@ -24,24 +24,5 @@
 
 export function twoSumLessThanK(nums: number[], k: number): number {
     // TODO: Implement your solution here
-    
-    let left = 0;
-    let right = nums.length - 1;
-    let max = -1;
-
-    while (left < right) {
-        const sum = nums[left] + nums[right];
-
-        if (sum < k) {
-            left ++;
-
-            max = Math.max(max, sum);
-
-        } else {
-            right --;
-
-        }
-    }
-    
-    return max;
+    return -1
 }

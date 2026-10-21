@@ -25,5 +25,5 @@
 
 export function moveZeroes(nums: number[]): number[] {
     // TODO: Implement your solution here
-    return [];
+    return []
 }

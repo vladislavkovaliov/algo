@@ -13,19 +13,31 @@
 ```typescript
 export function firstNegativeInWindow(nums: number[], k: number): number[] {
     const result: number[] = [];
-    let negativeIdx = -1;
+    const negativeIndices: number[] = [];
+    let head = 0;
 
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] < 0 && negativeIdx < i) {
-            negativeIdx = i;
+    for (let right = 0; right < nums.length; right++) {
+        if (nums[right] < 0) {
+            negativeIndices.push(right);
         }
 
-        if (i >= k - 1) {
-            if (negativeIdx >= i - k + 1) {
-                result.push(nums[negativeIdx]);
-            } else {
-                result.push(0);
+        if (right >= k - 1) {
+            const left = right - k + 1;
+
+            // выбрасываем индексы, которые уже слева от окна
+            while (
+                head < negativeIndices.length &&
+                negativeIndices[head] < left
+            ) {
+                head++;
             }
+
+            // первый отрицательный в окне — в начале очереди
+            result.push(
+                head < negativeIndices.length
+                    ? nums[negativeIndices[head]]
+                    : 0
+            );
         }
     }
 

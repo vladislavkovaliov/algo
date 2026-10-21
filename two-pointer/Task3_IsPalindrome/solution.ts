@@ -29,5 +29,6 @@
 
 export function isPalindrome(s: string): boolean {
     // TODO: Implement your solution here
-    return false;
+
+    return false
 }

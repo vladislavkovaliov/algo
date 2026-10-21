@@ -24,5 +24,5 @@
 
 export function firstNegativeInWindow(nums: number[], k: number): number[] {
     // TODO: Implement your solution here
-    return [];
+    return []
 }

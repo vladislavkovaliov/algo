@@ -26,5 +26,5 @@
 
 export function threeSumSorted(nums: number[], target: number): number[][] {
     // TODO: Implement your solution here
-    return [];
+    return []
 }

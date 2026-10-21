@@ -133,9 +133,11 @@
     "test:bt:19": "tsx backtracking/Task19_WordBreakII/solution.test.ts",
     "test:bt:20": "tsx backtracking/Task20_RemoveInvalidParentheses/solution.test.ts",
     "test:bt:all": "for i in $(seq 1 20); do npm run test:bt:$i; done",
+    "test:watch": "node --test --watch --import tsx --test-concurrency=1 --test-reporter=spec '*/Task*/solution.test.ts'",
     "task:random": "bash scripts/random-task.sh"
   },
   "devDependencies": {
+    "@types/node": "^24.19.2",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
   }

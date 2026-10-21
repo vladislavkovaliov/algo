@@ -23,5 +23,5 @@
 
 export function countSubarraysSizeKSumEquals(nums: number[], k: number, target: number): number {
     // TODO: Implement your solution here
-    return 0;
+    return -1
 }

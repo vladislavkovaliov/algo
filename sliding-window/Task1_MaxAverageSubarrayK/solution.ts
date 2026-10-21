@@ -23,19 +23,5 @@
 
 export function maxAverageSubarray(nums: number[], k: number): number {
     // TODO: Implement your solution here
-    let sum = 0;
-
-    for (let i = 0; i < k; i++) {
-        sum = sum + nums[i];
-    }
-
-    let max = sum;
-
-    for (let i = k; i < nums.length; i++) {
-        sum = sum - nums[i - k] + nums[i];
-
-        max = Math.max(max, sum);
-    }
-
-    return max / k;
+    return -1
 }

@@ -24,15 +24,5 @@
 
 export function removeDuplicates(nums: number[]): number {
     // TODO: Implement your solution here
-
-    let slow = 0;
-
-    for (let fast = 0; fast < nums.length; fast++) {
-        if (nums[slow] !== nums[fast]) {
-            slow = slow + 1;
-            nums[slow] = nums[fast]
-        }
-    }
-
-    return slow + 1;
+    return -1
 }
